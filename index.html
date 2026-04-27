@@ -1,0 +1,1128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>BLAKE ELFORD · THE COURSE · MARKETING MANAGER USA</title>
+<meta name="description" content="An application for the HYROX Marketing Manager USA role, told as 8 stations." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #f4f4ec;
+    --ink-soft: #b8b8b0;
+    --ink-mute: #6e6e66;
+    --bg: #0a0a08;
+    --bg-soft: #111110;
+    --bg-card: #15151312;
+    --accent: #d4fe00;
+    --accent-dim: #b3da00;
+    --line: #232320;
+    --line-bright: #2f2f2a;
+    --grid: #1a1a17;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Manrope', system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Subtle grid texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Grain overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 2;
+    mix-blend-mode: overlay;
+  }
+
+  main { position: relative; z-index: 3; }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- TYPOGRAPHY ---------- */
+  .display {
+    font-family: 'Anton', 'Arial Black', sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    line-height: 0.88;
+  }
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-feature-settings: 'tnum';
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .accent { color: var(--accent); }
+
+  /* ---------- TIMING TICKER ---------- */
+  .ticker {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 36px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .ticker .left { display: flex; gap: 18px; align-items: center; }
+  .ticker .live {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--accent);
+  }
+  .ticker .live::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: 0.35 } }
+  .ticker .right { display: flex; gap: 18px; }
+  .ticker .hide-sm { display: inline; }
+  @media (max-width: 700px) {
+    .ticker { font-size: 10px; padding: 0 14px; letter-spacing: 0.12em; }
+    .ticker .hide-sm { display: none; }
+  }
+
+  /* ---------- SCROLL PROGRESS ---------- */
+  .progress {
+    position: fixed;
+    top: 36px; left: 0; right: 0;
+    height: 2px;
+    background: var(--line);
+    z-index: 50;
+  }
+  .progress .bar {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    box-shadow: 0 0 18px var(--accent);
+    transition: width 0.08s linear;
+  }
+
+  /* ---------- LAYOUT ---------- */
+  .wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  @media (max-width: 700px) {
+    .wrap { padding: 0 20px; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: 100vh;
+    padding: 130px 0 80px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 60px;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .bib {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+    border: 1px solid var(--accent);
+    padding: 10px 14px 12px;
+    background: rgba(212, 254, 0, 0.04);
+  }
+  .bib .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .bib .num {
+    font-family: 'Anton', sans-serif;
+    font-size: 38px;
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .hero-rt { text-align: right; }
+  .hero-rt .eyebrow { display: block; margin-bottom: 4px; }
+  .hero-rt .val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--ink);
+    letter-spacing: 0.05em;
+  }
+
+  .hero-name {
+    font-size: clamp(70px, 18vw, 260px);
+  }
+  .hero-name .last { display: block; }
+  .hero-name .first {
+    display: block;
+    color: var(--ink);
+  }
+  .hero-name .last { color: var(--ink); }
+  .hero-name .stroke {
+    -webkit-text-stroke: 1.5px var(--ink-mute);
+    color: transparent;
+  }
+
+  .hero-tagline {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 60px;
+    align-items: end;
+    border-top: 1px solid var(--line);
+    padding-top: 40px;
+  }
+  @media (max-width: 800px) {
+    .hero-tagline { grid-template-columns: 1fr; gap: 30px; }
+  }
+  .hero-tagline p {
+    font-size: clamp(18px, 2.2vw, 26px);
+    line-height: 1.35;
+    max-width: 740px;
+    color: var(--ink-soft);
+    font-weight: 300;
+  }
+  .hero-tagline p strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .hero-tagline .applied {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+  @media (max-width: 800px) {
+    .hero-tagline .applied { text-align: left; }
+  }
+  .hero-tagline .applied .target {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .hero-stats {
+    margin-top: 70px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  @media (max-width: 800px) {
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  }
+  .hstat {
+    padding: 28px 24px;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  .hero-stats .hstat:last-child { border-right: 0; }
+  @media (max-width: 800px) {
+    .hstat:nth-child(2n) { border-right: 0; }
+    .hstat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  }
+  .hstat .num {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(34px, 5vw, 54px);
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .hstat .lbl {
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .hero-scroll {
+    margin-top: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .hero-scroll .arrow {
+    display: inline-block;
+    margin-left: 10px;
+    animation: bob 2s ease-in-out infinite;
+  }
+  @keyframes bob {
+    0%,100% { transform: translateY(0) }
+    50% { transform: translateY(6px) }
+  }
+
+  /* ---------- COURSE MAP ---------- */
+  .map {
+    padding: 100px 0 60px;
+    border-bottom: 1px solid var(--line);
+  }
+  .map-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 50px;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .map-head h2 {
+    font-size: clamp(40px, 6vw, 84px);
+    line-height: 0.92;
+    max-width: 900px;
+  }
+  .map-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 8px;
+  }
+  @media (max-width: 1100px) {
+    .map-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .map-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .map-cell {
+    border: 1px solid var(--line);
+    padding: 14px 12px 16px;
+    background: var(--bg-soft);
+    aspect-ratio: 1 / 1.2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-decoration: none;
+  }
+  .map-cell:hover {
+    border-color: var(--accent);
+    background: rgba(212, 254, 0, 0.04);
+    transform: translateY(-2px);
+  }
+  .map-cell .n {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+  }
+  .map-cell .ico {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0;
+  }
+  .map-cell svg { width: 100%; max-width: 56px; height: auto; stroke: var(--ink); fill: none; stroke-width: 1.4; }
+  .map-cell:hover svg { stroke: var(--accent); }
+  .map-cell .nm {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    line-height: 1.3;
+  }
+
+  /* ---------- STATIONS ---------- */
+  .station {
+    padding: 110px 0;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .station-head {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 60px;
+    align-items: start;
+    margin-bottom: 50px;
+  }
+  @media (max-width: 900px) {
+    .station-head { grid-template-columns: 1fr; gap: 24px; }
+  }
+  .station-num {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(110px, 16vw, 200px);
+    line-height: 0.78;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+  }
+  .station-meta .eyebrow { margin-bottom: 16px; display: block; }
+  .station-meta .label {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(28px, 3.6vw, 50px);
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .station-meta .label .green { color: var(--accent); }
+
+  .station-body {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .station-body { grid-template-columns: 1fr; gap: 30px; }
+  }
+  .station-icon {
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--line);
+    padding: 24px;
+    background: var(--bg-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .station-icon svg {
+    width: 100%; height: 100%;
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .station-copy h3 {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    font-size: clamp(24px, 2.8vw, 36px);
+    line-height: 1.05;
+    margin-bottom: 22px;
+    text-transform: uppercase;
+    letter-spacing: -0.005em;
+  }
+  .station-copy p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  .station-copy p strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .station-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  .station-stat {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .station-stat .v {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(34px, 4vw, 52px);
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+  .station-stat .l {
+    margin-top: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* run divider between stations */
+  .run {
+    padding: 28px 0;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    color: var(--ink-mute);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--line);
+  }
+  .run .line {
+    flex: 1;
+    height: 1px;
+    background: repeating-linear-gradient(
+      to right,
+      var(--line-bright) 0,
+      var(--line-bright) 6px,
+      transparent 6px,
+      transparent 12px
+    );
+  }
+  .run .pill {
+    padding: 4px 10px;
+    border: 1px solid var(--line-bright);
+    color: var(--ink-soft);
+  }
+
+  /* fade-in animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- FINISH LINE ---------- */
+  .finish {
+    padding: 140px 0 80px;
+    position: relative;
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(212, 254, 0, 0.04) 100%);
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .finish::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        var(--accent) 0,
+        var(--accent) 14px,
+        var(--bg) 14px,
+        var(--bg) 28px
+      );
+    opacity: 0.85;
+  }
+  .finish::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        var(--accent) 0,
+        var(--accent) 18px,
+        var(--bg) 18px,
+        var(--bg) 36px
+      );
+  }
+  .finish-inner { padding-top: 30px; }
+  .finish .eyebrow { display: block; margin-bottom: 18px; }
+  .finish h2 {
+    font-size: clamp(56px, 11vw, 180px);
+    line-height: 0.86;
+    margin-bottom: 36px;
+    color: var(--ink);
+  }
+  .finish h2 .accent { color: var(--accent); }
+  .finish-text {
+    font-size: clamp(18px, 1.8vw, 22px);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 740px;
+    margin-bottom: 60px;
+    font-weight: 300;
+  }
+  .finish-text strong { color: var(--ink); font-weight: 600; }
+
+  .finish-card {
+    border: 1px solid var(--line-bright);
+    padding: 40px;
+    background: var(--bg-soft);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 50px;
+    align-items: center;
+  }
+  @media (max-width: 800px) {
+    .finish-card { grid-template-columns: 1fr; gap: 30px; padding: 28px; }
+  }
+  .finish-card .name {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(32px, 4vw, 44px);
+    color: var(--ink);
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  .finish-card .role {
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .contact-list {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .contact-list a, .contact-list span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .contact-list a:hover { color: var(--accent); }
+  .contact-list .lab {
+    color: var(--ink-mute);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-right: 10px;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 22px 32px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    border: 1px solid var(--accent);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  .cta:hover {
+    background: var(--bg);
+    color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(212, 254, 0, 0.15);
+  }
+  .cta .arr {
+    width: 22px; height: 22px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .cta svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 2; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    padding: 40px 0 60px;
+    color: var(--ink-mute);
+  }
+  .foot-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .foot-row .right { color: var(--accent); }
+
+  /* TOC inside ticker pulled-out a bit */
+  ::selection { background: var(--accent); color: var(--bg); }
+</style>
+</head>
+<body>
+
+<!-- TIMING TICKER -->
+<div class="ticker" role="banner">
+  <div class="left">
+    <span class="live">LIVE APPLICATION</span>
+    <span class="hide-sm">BIB · 001</span>
+    <span class="hide-sm">CHICAGO · IL</span>
+  </div>
+  <div class="right">
+    <span class="hide-sm">8 STATIONS</span>
+    <span>BLAKE / HYROX</span>
+  </div>
+</div>
+<div class="progress"><div class="bar" id="prog"></div></div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-meta reveal">
+      <div class="bib">
+        <span class="label">Applicant Bib</span>
+        <span class="num">#001</span>
+      </div>
+      <div class="hero-rt">
+        <span class="eyebrow">Course Distance</span>
+        <span class="val">8 STATIONS · 1 ROLE</span>
+      </div>
+    </div>
+
+    <h1 class="display hero-name reveal">
+      <span class="first">BLAKE</span>
+      <span class="last stroke">ELFORD</span>
+    </h1>
+
+    <div class="hero-tagline reveal">
+      <p>
+        The HYROX format is built on the idea that the work between stations matters as much as the work at them. That's how I think about marketing: <strong>the campaign is one station, the CRM is another, the events are another, and the through-line is what wins.</strong>
+      </p>
+      <div class="applied">
+        APPLYING FOR:<br>
+        <span class="target">MARKETING MANAGER · USA</span><br>
+        HYROX · RIVER NORTH<br>
+        SUBMITTED 2026
+      </div>
+    </div>
+
+    <div class="hero-stats reveal">
+      <div class="hstat">
+        <div class="num">6+</div>
+        <div class="lbl">Years B2B Marketing</div>
+      </div>
+      <div class="hstat">
+        <div class="num">$418M</div>
+        <div class="lbl">Serviceable Market Owned</div>
+      </div>
+      <div class="hstat">
+        <div class="num">$670K+</div>
+        <div class="lbl">Pipeline / 1 Campaign</div>
+      </div>
+      <div class="hstat">
+        <div class="num">$18M</div>
+        <div class="lbl">Series A Shipped</div>
+      </div>
+    </div>
+
+    <div class="hero-scroll reveal">
+      <span>SCROLL TO START · 0.0 KM <span class="arrow">↓</span></span>
+      <span>HEAT 01</span>
+    </div>
+  </div>
+</section>
+
+<!-- COURSE MAP -->
+<section class="map">
+  <div class="wrap">
+    <div class="map-head">
+      <span class="eyebrow reveal">The Course · Read Time 4 min</span>
+      <h2 class="display reveal">8 STATIONS.<br>1 MARKETER.<br><span class="accent">EVERYTHING IT TAKES.</span></h2>
+    </div>
+    <div class="map-grid reveal">
+      <a href="#s01" class="map-cell">
+        <span class="n">01</span>
+        <span class="ico">
+          <svg viewBox="0 0 64 64"><path d="M14 50 L34 14 M34 14 L50 28 M30 22 L18 50 M44 22 C44 22 36 18 30 22"/></svg>
+        </span>
+        <span class="nm">SkiErg<br>Range</span>
+      </a>
+      <a href="#s02" class="map-cell">
+        <span class="n">02</span>
+        <span class="ico">
+          <svg viewBox="0 0 64 64"><rect x="16" y="32" width="32" height="14"/><path d="M16 46 L10 52 M48 46 L54 52 M22 32 L22 22 L42 22 L42 32 M30 22 L30 14"/></svg>
+        </span>
+        <span class="nm">Sled Push<br>Pipeline</span>
+      </a>
+      <a href="#s03" class="map-cell">
+        <span class="n">03</span>
+        <span class="ico">
+          <svg viewBox="0 0 64 64"><rect x="32" y="32" width="22" height="14"/><path d="M32 39 L10 28 L8 32 M10 28 L8 24"/></svg>
+        </span>
+        <span class="nm">Sled Pull<br>Campaigns</span>
+      </a>
+      <a href="#s04" class="map-cell">
+        <span class="n">04</span>
+        <span class="ico">
+          <svg viewBox="0 0 64 64"><circle cx="20" cy="14" r="3.5"/><path d="M20 18 L20 30 L14 40 M20 30 L26 40 M20 22 L12 24 M20 22 L28 22 M40 50 Q44 30 50 22 M50 22 L56 14"/></svg>
+        </span>
+        <span class="nm">Burpees<br>Events</span>
+      </a>
+      <a href="#s05" class="map-cell">
+        <span class="n">05</span>
+        <span class="ico">
+          <svg viewBox="0 0 64 64"><path d="M14 48 L14 34 L26 30 L34 36 L44 30 L52 30"/><circle cx="30" cy="20" r="3.5"/><path d="M30 24 L30 32"/></svg>
+        </span>
+        <span class="nm">Rowing<br>CRM</span>
+      </a>
+      <a href="#s06" class="map-cell">
+        <span class="n">06</span>
+        <span class="ico">
+          <svg viewBox="0 0 64 64"><circle cx="32" cy="14" r="3.5"/><path d="M32 18 L32 38 M32 24 L18 28 L18 38 M32 24 L46 28 L46 38 M14 38 L22 38 M42 38 L50 38 M32 38 L26 56 M32 38 L38 56"/></svg>
+        </span>
+        <span class="nm">Farmers<br>Cross-Func</span>
+      </a>
+      <a href="#s07" class="map-cell">
+        <span class="n">07</span>
+        <span class="ico">
+          <svg viewBox="0 0 64 64"><circle cx="26" cy="14" r="3.5"/><path d="M26 18 L26 30 L18 50 M26 30 L40 36 L40 48 L46 56 M40 48 L34 56 M26 22 L40 26"/></svg>
+        </span>
+        <span class="nm">Lunges<br>Insight</span>
+      </a>
+      <a href="#s08" class="map-cell">
+        <span class="n">08</span>
+        <span class="ico">
+          <svg viewBox="0 0 64 64"><path d="M50 8 L50 56 M14 12 L14 56"/><circle cx="32" cy="22" r="6"/><path d="M37 18 L46 14"/></svg>
+        </span>
+        <span class="nm">Wall Balls<br>AI Workflows</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STATION 01 -->
+<section class="station" id="s01">
+  <div class="wrap">
+    <div class="station-head reveal">
+      <div class="station-num">01</div>
+      <div class="station-meta">
+        <span class="eyebrow">Station 01 · SkiErg · 1000 m</span>
+        <h3 class="label">Endurance + range. <span class="green">From startup to enterprise.</span></h3>
+      </div>
+    </div>
+    <div class="station-body reveal">
+      <div class="station-icon">
+        <svg viewBox="0 0 64 64"><path d="M14 50 L34 14 M34 14 L50 28 M30 22 L18 50 M44 22 C44 22 36 18 30 22"/></svg>
+      </div>
+      <div class="station-copy">
+        <h3>The first kilometer is just the warm-up.</h3>
+        <p>I've built marketing in two very different rooms: a B2B SaaS startup where I was the only marketer for five years, and the world's largest commercial fitness brand, where I now lead U.S. segment marketing for two of the largest verticals in the industry.</p>
+        <p>That range matters for HYROX. The U.S. role isn't a single shape: it's brand stewardship one day, athlete acquisition the next, partner activation the day after. <strong>I've built and operated across that full distance.</strong></p>
+      </div>
+      <div class="station-stats">
+        <div class="station-stat"><div class="v">2</div><div class="l">Industries · SaaS + Commercial Fitness</div></div>
+        <div class="station-stat"><div class="v">5 yrs</div><div class="l">Sole Marketer · Fuel Me</div></div>
+        <div class="station-stat"><div class="v">2 yrs</div><div class="l">Enterprise GTM · Life Fitness</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="run"><div class="wrap" style="display:flex; align-items:center; gap:18px; flex:1;"><span class="pill">RUN · 1 KM</span><span class="line"></span><span>STATION 02 AHEAD</span></div></div>
+
+<!-- STATION 02 -->
+<section class="station" id="s02">
+  <div class="wrap">
+    <div class="station-head reveal">
+      <div class="station-num">02</div>
+      <div class="station-meta">
+        <span class="eyebrow">Station 02 · Sled Push · 50 m / 75 m</span>
+        <h3 class="label">Pushing pipeline forward. <span class="green">Heavy load. Real ROI.</span></h3>
+      </div>
+    </div>
+    <div class="station-body reveal">
+      <div class="station-icon">
+        <svg viewBox="0 0 64 64"><rect x="16" y="32" width="32" height="14"/><path d="M16 46 L10 52 M48 46 L54 52 M22 32 L22 22 L42 22 L42 32 M30 22 L30 14"/></svg>
+      </div>
+      <div class="station-copy">
+        <h3>I run campaigns to drive deals, not impressions.</h3>
+        <p>At Life Fitness, I built a Pardot-powered MUH warranty promotion sent from individual seller accounts to 8,000+ enriched contacts. <strong>One campaign generated 34 new opportunities and $670K+ in attributed pipeline.</strong></p>
+        <p>I also led marketing activation for 10+ industry conferences that contributed to $10M+ in 2025 opportunities and $1.4M in early 2026 pipeline. The HYROX participant funnel needs the same discipline: every touchpoint earning its weight.</p>
+      </div>
+      <div class="station-stats">
+        <div class="station-stat"><div class="v">$670K+</div><div class="l">Pipeline · 1 Campaign</div></div>
+        <div class="station-stat"><div class="v">$10M+</div><div class="l">Conference Opps · 2025</div></div>
+        <div class="station-stat"><div class="v">8,000</div><div class="l">Targeted Contacts</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="run"><div class="wrap" style="display:flex; align-items:center; gap:18px; flex:1;"><span class="pill">RUN · 1 KM</span><span class="line"></span><span>STATION 03 AHEAD</span></div></div>
+
+<!-- STATION 03 -->
+<section class="station" id="s03">
+  <div class="wrap">
+    <div class="station-head reveal">
+      <div class="station-num">03</div>
+      <div class="station-meta">
+        <span class="eyebrow">Station 03 · Sled Pull · 50 m</span>
+        <h3 class="label">Pulling teams together. <span class="green">One campaign. One idea.</span></h3>
+      </div>
+    </div>
+    <div class="station-body reveal">
+      <div class="station-icon">
+        <svg viewBox="0 0 64 64"><rect x="32" y="32" width="22" height="14"/><path d="M32 39 L10 28 L8 32 M10 28 L8 24"/></svg>
+      </div>
+      <div class="station-copy">
+        <h3>"A Stay That Moves You."</h3>
+        <p>I conceived and launched the first full-funnel integrated campaign in our hospitality segment. I wrote the brief, defined the four messaging pillars, and orchestrated execution across <strong>social, content, SEO, web, email, and trade media</strong> around a single positioning shift: from product-centric to operator-centric.</p>
+        <p>Translating a global brand into U.S. campaigns is HYROX's job description for this role. It's also the work I do every week.</p>
+      </div>
+      <div class="station-stats">
+        <div class="station-stat"><div class="v">6</div><div class="l">Channels Orchestrated</div></div>
+        <div class="station-stat"><div class="v">4</div><div class="l">Messaging Pillars · Self-Authored</div></div>
+        <div class="station-stat"><div class="v">1st</div><div class="l">Of Its Kind In Segment</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="run"><div class="wrap" style="display:flex; align-items:center; gap:18px; flex:1;"><span class="pill">RUN · 1 KM</span><span class="line"></span><span>STATION 04 AHEAD</span></div></div>
+
+<!-- STATION 04 -->
+<section class="station" id="s04">
+  <div class="wrap">
+    <div class="station-head reveal">
+      <div class="station-num">04</div>
+      <div class="station-meta">
+        <span class="eyebrow">Station 04 · Burpee Broad Jumps · 80 m</span>
+        <h3 class="label">Events as theatre. <span class="green">Brand on the floor.</span></h3>
+      </div>
+    </div>
+    <div class="station-body reveal">
+      <div class="station-icon">
+        <svg viewBox="0 0 64 64"><circle cx="20" cy="14" r="3.5"/><path d="M20 18 L20 30 L14 40 M20 30 L26 40 M20 22 L12 24 M20 22 L28 22 M40 50 Q44 30 50 22 M50 22 L56 14"/></svg>
+      </div>
+      <div class="station-copy">
+        <h3>I've built activations that sell, not just signal.</h3>
+        <p>For our HFA Atmos product launch, I designed an in-booth activation that recreated a real gym environment. For 10+ other industry conferences, I owned the full lifecycle: pre-show comms, booth build, in-booth selling, post-event follow-up.</p>
+        <p>HYROX events ARE the brand. I get that. I've spent two years walking show floors and three more before that running scrappy startup activations that punched above their weight.</p>
+      </div>
+      <div class="station-stats">
+        <div class="station-stat"><div class="v">10+</div><div class="l">Conferences · 2025</div></div>
+        <div class="station-stat"><div class="v">$25K-$750K</div><div class="l">Event Budget Range</div></div>
+        <div class="station-stat"><div class="v">In-booth</div><div class="l">Direct Customer Conversations</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="run"><div class="wrap" style="display:flex; align-items:center; gap:18px; flex:1;"><span class="pill">RUN · 1 KM</span><span class="line"></span><span>STATION 05 AHEAD</span></div></div>
+
+<!-- STATION 05 -->
+<section class="station" id="s05">
+  <div class="wrap">
+    <div class="station-head reveal">
+      <div class="station-num">05</div>
+      <div class="station-meta">
+        <span class="eyebrow">Station 05 · Rowing · 1000 m</span>
+        <h3 class="label">CRM is rhythm. <span class="green">Sustained power output.</span></h3>
+      </div>
+    </div>
+    <div class="station-body reveal">
+      <div class="station-icon">
+        <svg viewBox="0 0 64 64"><path d="M14 48 L14 34 L26 30 L34 36 L44 30 L52 30"/><circle cx="30" cy="20" r="3.5"/><path d="M30 24 L30 32"/></svg>
+      </div>
+      <div class="station-copy">
+        <h3>I treat marketing automation like a training plan.</h3>
+        <p>I run a weekly email cadence to 12,000+ select contacts, manage segmentation across a 50,000-contact database with three sub-segments, and built a <strong>funnel-stage tracking system in Pardot using lead scoring, engagement metrics, and behavioral triggers</strong>. Before that system existed, every contact got the same message regardless of where they were.</p>
+        <p>I also ran a Salesforce data quality diagnostic, partnered with RevOps and ZoomInfo, and reduced contacts missing job titles from ~50% to ~13%, unlocking real role-based segmentation.</p>
+      </div>
+      <div class="station-stats">
+        <div class="station-stat"><div class="v">50K</div><div class="l">Contact Database</div></div>
+        <div class="station-stat"><div class="v">50% → 13%</div><div class="l">Data Gap · Closed</div></div>
+        <div class="station-stat"><div class="v">12K+</div><div class="l">Weekly Email Audience</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="run"><div class="wrap" style="display:flex; align-items:center; gap:18px; flex:1;"><span class="pill">RUN · 1 KM</span><span class="line"></span><span>STATION 06 AHEAD</span></div></div>
+
+<!-- STATION 06 -->
+<section class="station" id="s06">
+  <div class="wrap">
+    <div class="station-head reveal">
+      <div class="station-num">06</div>
+      <div class="station-meta">
+        <span class="eyebrow">Station 06 · Farmers Carry · 200 m</span>
+        <h3 class="label">Carrying weight across teams. <span class="green">Without dropping it.</span></h3>
+      </div>
+    </div>
+    <div class="station-body reveal">
+      <div class="station-icon">
+        <svg viewBox="0 0 64 64"><circle cx="32" cy="14" r="3.5"/><path d="M32 18 L32 38 M32 24 L18 28 L18 38 M32 24 L46 28 L46 38 M14 38 L22 38 M42 38 L50 38 M32 38 L26 56 M32 38 L38 56"/></svg>
+      </div>
+      <div class="station-copy">
+        <h3>I'm the connective tissue between sales, brand, and product.</h3>
+        <p>I built the strategic narrative for a $700K+/year Mill Creek key account RFP, synthesizing third-party research from McKinsey, the Global Wellness Institute, and ACSM into a consultative pitch on wellness real estate trends. I helped facilitate a strategic hub visit with Marriott's senior luxury leadership, running structured workshops and translating their feedback into a brand positioning framework.</p>
+        <p>The HYROX role lives at the seam between global brand, U.S. team, partnerships, and events. <strong>I've been working that seam for two years.</strong> I've also led agencies, offshore creative teams, and content contractors, with the next step being direct people management.</p>
+      </div>
+      <div class="station-stats">
+        <div class="station-stat"><div class="v">$700K+</div><div class="l">Annual Key Account · Pitch I Authored</div></div>
+        <div class="station-stat"><div class="v">3</div><div class="l">Global Brands Engaged · Marriott, Hilton, Hyatt</div></div>
+        <div class="station-stat"><div class="v">Cross-Func</div><div class="l">Sales · Product · Brand · Global</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="run"><div class="wrap" style="display:flex; align-items:center; gap:18px; flex:1;"><span class="pill">RUN · 1 KM</span><span class="line"></span><span>STATION 07 AHEAD</span></div></div>
+
+<!-- STATION 07 -->
+<section class="station" id="s07">
+  <div class="wrap">
+    <div class="station-head reveal">
+      <div class="station-num">07</div>
+      <div class="station-meta">
+        <span class="eyebrow">Station 07 · Sandbag Lunges · 100 m</span>
+        <h3 class="label">Audience insight, one rep at a time. <span class="green">VOC. Personas. Repeat.</span></h3>
+      </div>
+    </div>
+    <div class="station-body reveal">
+      <div class="station-icon">
+        <svg viewBox="0 0 64 64"><circle cx="26" cy="14" r="3.5"/><path d="M26 18 L26 30 L18 50 M26 30 L40 36 L40 48 L46 56 M40 48 L34 56 M26 22 L40 26"/></svg>
+      </div>
+      <div class="station-copy">
+        <h3>The community is the product. I listen for a living.</h3>
+        <p>I designed and facilitated quarterly VOC calls with field sellers across three hospitality tiers. Those sessions surfaced competitive intelligence (e.g., Technogym luxury perception), buyer motivations (the "wow factor" trend), and content gaps that fed directly into messaging, sales enablement, and campaign strategy.</p>
+        <p>HYROX has one of the most engaged athlete communities in fitness. <strong>Building programs that listen, surface, and respond to that community</strong> is exactly the kind of work I want to bring to the U.S. region.</p>
+      </div>
+      <div class="station-stats">
+        <div class="station-stat"><div class="v">Quarterly</div><div class="l">VOC Cadence · Sustained</div></div>
+        <div class="station-stat"><div class="v">3</div><div class="l">Audience Tiers · Distinct Strategy Per Tier</div></div>
+        <div class="station-stat"><div class="v">Insight → Action</div><div class="l">Feedback Loop · Closed</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="run"><div class="wrap" style="display:flex; align-items:center; gap:18px; flex:1;"><span class="pill">RUN · 1 KM</span><span class="line"></span><span>STATION 08 · FINAL AHEAD</span></div></div>
+
+<!-- STATION 08 -->
+<section class="station" id="s08">
+  <div class="wrap">
+    <div class="station-head reveal">
+      <div class="station-num">08</div>
+      <div class="station-meta">
+        <span class="eyebrow">Station 08 · Wall Balls · 75 / 100 reps · The Final Station</span>
+        <h3 class="label">Modern marketers move faster. <span class="green">I've built the leverage.</span></h3>
+      </div>
+    </div>
+    <div class="station-body reveal">
+      <div class="station-icon">
+        <svg viewBox="0 0 64 64"><path d="M50 8 L50 56 M14 12 L14 56"/><circle cx="32" cy="22" r="6"/><path d="M37 18 L46 14"/></svg>
+      </div>
+      <div class="station-copy">
+        <h3>I built custom AI agents to run "A Stay That Moves You."</h3>
+        <p>To accelerate concept-to-creation without agency budget, I designed a set of custom AI agents modeled after core ad agency roles: strategist, copywriter, creative director. <strong>An applied use of GenAI that goes beyond "uses ChatGPT."</strong> It's how I shipped a full-funnel campaign at startup speed inside a global enterprise.</p>
+        <p>For HYROX USA, that's leverage: ship more, ship better, ship faster, without scaling headcount.</p>
+      </div>
+      <div class="station-stats">
+        <div class="station-stat"><div class="v">Custom</div><div class="l">AI Agents · Strategist / Writer / Director</div></div>
+        <div class="station-stat"><div class="v">80/20</div><div class="l">Output Approach · Speed To Polish</div></div>
+        <div class="station-stat"><div class="v">$0</div><div class="l">Incremental Agency Spend</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINISH LINE -->
+<section class="finish" id="finish">
+  <div class="wrap finish-inner">
+    <span class="eyebrow reveal">FINISH LINE · 8/8 STATIONS COMPLETE</span>
+    <h2 class="display reveal">RACE YOU TO<br>THE <span class="accent">START</span> LINE.</h2>
+    <p class="finish-text reveal">
+      I'm not applying for HYROX because it's a marketing job in fitness. I'm applying because it's <strong>a marketing job at the most exciting brand in fitness right now</strong>: a category, a community, and a calendar that finally treats the audience like athletes. I'd love to bring my campaign and CRM craft to the U.S. team.
+    </p>
+
+    <div class="finish-card reveal">
+      <div>
+        <div class="name">Blake W. Elford</div>
+        <div class="role">B2B Marketing Manager · Chicago, IL</div>
+        <div class="contact-list">
+          <a href="mailto:blakebyelford@gmail.com"><span class="lab">Email</span>blakebyelford@gmail.com</a>
+          <a href="tel:+12819288447"><span class="lab">Phone</span>(281) 928-8447</a>
+          <a href="https://linkedin.com/in/blakeelford" target="_blank" rel="noopener"><span class="lab">LinkedIn</span>linkedin.com/in/blakeelford</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>© 2026 · BLAKE ELFORD · BUILT FOR HYROX</span>
+    <span class="right">8/8 STATIONS · TIME: WHENEVER YOU'RE READY</span>
+  </div>
+</footer>
+
+</main>
+
+<script>
+  // Scroll progress bar
+  const prog = document.getElementById('prog');
+  function updateProg() {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    prog.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProg, { passive: true });
+  updateProg();
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>
